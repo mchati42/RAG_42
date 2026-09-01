@@ -25,3 +25,23 @@ class UnansweredQuestion(BaseModel):
 
 class RagDataset(BaseModel):
     rag_questions: list[AnsweredQuestion | UnansweredQuestion]
+
+
+class MinimalSearchResults(BaseModel):
+    question_id: str
+    question: str
+    retrieved_sources: list[MinimalSource]
+
+
+class MinimalAnswer(MinimalSearchResults):
+    answer: str
+
+
+class StudentSearchResults(BaseModel):
+    search_results: list[MinimalSearchResults]
+    k: int
+
+
+class StudentSearchResultsAndAnswer(BaseModel):
+    search_results: list[MinimalAnswer]
+    k: int
