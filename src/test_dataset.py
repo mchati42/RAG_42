@@ -1,16 +1,19 @@
-from dataset_loader import DatasetLoader
-from models import AnsweredQuestion
+import json
 
-datasetloader = DatasetLoader(
-    "/home/mchati/Desktop/RAG_42/data/datasets/AnsweredQuestions/dataset_code_public.json"
-    )
+from models import RagDataset
 
-data = datasetloader.load()
-print(data.keys())
 
-questions = data["rag_questions"]
+DATASET_PATH = (
+    "/home/mchati/Desktop/RAG_42/"
+    "data/datasets/AnsweredQuestions/dataset_code_public.json"
+)
 
-print(type(questions[0]["sources"]))
-print(type(questions[0]["sources"][0]))
-question = AnsweredQuestion.model_validate(questions[0])
-print(type(question))
+
+with open(DATASET_PATH, "r") as file:
+    data = json.load(file)
+
+
+dataset = RagDataset.model_validate(data)
+
+print(type(dataset))
+print(type(dataset.rag_questions[0]))

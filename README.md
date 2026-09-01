@@ -828,7 +828,7 @@ The project will be developed incrementally.
 * [x] Configure uv
 * [x] Create `.gitignore`
 * [x] Add question datasets
-* [ ] Create `src/`
+* [x] Create `src/`
 * [ ] Configure project dependencies
 * [ ] Create Makefile
 * [ ] Configure flake8
@@ -840,6 +840,7 @@ The project will be developed incrementally.
 * [x] Create `UnansweredQuestion`
 * [x] Create `AnsweredQuestion`
 * [ ] Create `RagDataset`
+* [x] Create `RagDataset`
 * [ ] Create `MinimalSearchResults`
 * [ ] Create `MinimalAnswer`
 * [ ] Create `StudentSearchResults`

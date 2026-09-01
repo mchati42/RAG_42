@@ -1,22 +1,17 @@
 import json
 
-from models import AnsweredQuestion
+from models import RagDataset
 
 
 class DatasetLoader:
+
     def __init__(self, path: str):
         self.path = path
 
-    def load(self) -> list[AnsweredQuestion]:
+    def load(self) -> RagDataset:
         with open(self.path, "r") as file:
             data = json.load(file)
 
-        questions = data["rag_questions"]
+        rag_dataset = RagDataset.model_validate(data)
 
-        validated_questions: list[AnsweredQuestion] = []
-
-        for question in questions:
-            validated_question = AnsweredQuestion.model_validate(question)
-            validated_questions.append(validated_question)
-
-        return validated_questions
+        return rag_dataset
