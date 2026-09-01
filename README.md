@@ -830,9 +830,9 @@ The project will be developed incrementally.
 * [x] Add question datasets
 * [x] Create `src/`
 * [x] Configure project dependencies
-* [ ] Create Makefile
-* [ ] Configure flake8
-* [ ] Configure mypy
+* [x] Create Makefile
+* [x] Configure flake8
+* [x] Configure mypy
 
 ## Phase 2 — Data Models
 
