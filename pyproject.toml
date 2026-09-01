@@ -7,7 +7,9 @@ authors = [
     { name = "Your Name", email = "your.email@example.com" }
 ]
 dependencies = [
+    "fire>=0.7.1",
     "pydantic>=2.0",
+    "rank-bm25>=0.2.2",
     "tqdm>=4.65",
 ]
 

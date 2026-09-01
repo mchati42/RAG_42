@@ -829,7 +829,7 @@ The project will be developed incrementally.
 * [x] Create `.gitignore`
 * [x] Add question datasets
 * [x] Create `src/`
-* [ ] Configure project dependencies
+* [x] Configure project dependencies
 * [ ] Create Makefile
 * [ ] Configure flake8
 * [ ] Configure mypy
@@ -839,7 +839,6 @@ The project will be developed incrementally.
 * [x] Create `MinimalSource`
 * [x] Create `UnansweredQuestion`
 * [x] Create `AnsweredQuestion`
-* [ ] Create `RagDataset`
 * [x] Create `RagDataset`
 * [ ] Create `MinimalSearchResults`
 * [ ] Create `MinimalAnswer`
