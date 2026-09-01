@@ -840,10 +840,10 @@ The project will be developed incrementally.
 * [x] Create `UnansweredQuestion`
 * [x] Create `AnsweredQuestion`
 * [x] Create `RagDataset`
-* [ ] Create `MinimalSearchResults`
-* [ ] Create `MinimalAnswer`
-* [ ] Create `StudentSearchResults`
-* [ ] Create `StudentSearchResultsAndAnswer`
+* [x] Create `MinimalSearchResults`
+* [x] Create `MinimalAnswer`
+* [x] Create `StudentSearchResults`
+* [x] Create `StudentSearchResultsAndAnswer`
 * [x] Validate JSON datasets
 
 ## Phase 3 — Corpus Indexing
