@@ -1,5 +1,6 @@
 README.md
 pyproject.toml
+src/models.py
 src/rag_system.egg-info/PKG-INFO
 src/rag_system.egg-info/SOURCES.txt
 src/rag_system.egg-info/dependency_links.txt
