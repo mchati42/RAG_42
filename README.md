@@ -836,15 +836,15 @@ The project will be developed incrementally.
 
 ## Phase 2 — Data Models
 
-* [ ] Create `MinimalSource`
-* [ ] Create `UnansweredQuestion`
-* [ ] Create `AnsweredQuestion`
+* [x] Create `MinimalSource`
+* [x] Create `UnansweredQuestion`
+* [x] Create `AnsweredQuestion`
 * [ ] Create `RagDataset`
 * [ ] Create `MinimalSearchResults`
 * [ ] Create `MinimalAnswer`
 * [ ] Create `StudentSearchResults`
 * [ ] Create `StudentSearchResultsAndAnswer`
-* [ ] Validate JSON datasets
+* [x] Validate JSON datasets
 
 ## Phase 3 — Corpus Indexing
 
