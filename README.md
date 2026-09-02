@@ -848,8 +848,8 @@ The project will be developed incrementally.
 
 ## Phase 3 — Corpus Indexing
 
-* [ ] Load vLLM corpus
-* [ ] Discover relevant files
+* [x] Load vLLM corpus
+* [x] Discover relevant files
 * [ ] Implement Python chunking
 * [ ] Implement Markdown/Text chunking
 * [ ] Add character offsets

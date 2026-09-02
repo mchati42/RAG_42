@@ -45,3 +45,7 @@ class StudentSearchResults(BaseModel):
 class StudentSearchResultsAndAnswer(BaseModel):
     search_results: list[MinimalAnswer]
     k: int
+
+class Document(BaseModel):
+    file_path: str
+    content: str
