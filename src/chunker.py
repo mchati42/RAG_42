@@ -1,3 +1,4 @@
+import ast
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 def chunk_text(text: str, chunk_size: int = 2000) -> list[str]:
@@ -19,7 +20,14 @@ def get_chunk_offsets(text: str, chunks: list[str]) -> list[tuple[str, int, int]
         end = start + len(chunk)
         results.append((chunk, start, end))
         search_start = end
+    return results
 
+code = """ 
+    def hello(name):
+        print(name)
+    """
+    tree = ast.parse(code)
+    print(tree)
 if __name__ == "__main__":
     text = "abcdefghijklmnopqrstuvwxyz"
 
