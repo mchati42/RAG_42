@@ -40,10 +40,10 @@ def get_line_offset(lines: list[str], line_number: int) -> int:
     return count
 
 
-def chunk_python(text: str) -> list[str]:
+def chunk_python(text: str) -> list[tuple[str, int, int]]:
     tree = ast.parse(text)
     lines = text.splitlines(keepends=True)
-    chunks: list[str] = []
+    chunks: list[tuple[str, int, int]] = []
 
     for node in ast.walk(tree):
         if isinstance(node, ast.FunctionDef):
@@ -58,7 +58,7 @@ def chunk_python(text: str) -> list[str]:
             )
 
             chunk = text[start_offset:end_offset]
-            chunks.append(chunk)
+            chunks.append((chunk, start_offset, end_offset))
 
     return chunks
 
