@@ -683,3 +683,27 @@ Commit
 The goal is not only to make the RAG system work.
 
 The goal is to **understand why it works**.
+
+                 Python file
+                     │
+                     ▼
+                  AST parse
+                     │
+          ┌──────────┴──────────┐
+          ▼                     ▼
+       Function               Class
+          │                     │
+          │              Is class <= 2000?
+          │                     │
+          │              ┌──────┴──────┐
+          │             YES            NO
+          │              │              │
+          │              ▼              ▼
+          │        whole class     inspect methods
+          │                              │
+          │                              ▼
+          │                       split each method
+          │                              │
+          └──────────────┬───────────────┘
+                         ▼
+                       chunks
