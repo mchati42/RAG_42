@@ -1,0 +1,184 @@
+[1mdiff --git a/README.md b/README.md[m
+[1mindex 94b593a..1eb175b 100644[m
+[1m--- a/README.md[m
+[1m+++ b/README.md[m
+[36m@@ -1271,9 +1271,9 @@[m [mHowever, generated code must be:[m
+ [m
+ ### Chunk Model[m
+ [m
+[31m-* [ ] Final `Chunk` model[m
+[31m-* [ ] Chunk metadata[m
+[31m-* [ ] Chunk validation[m
+[32m+[m[32m* [x] Final `Chunk` model[m
+[32m+[m[32m* [x] Chunk metadata[m
+[32m+[m[32m* [x] Chunk validation[m
+ [m
+ ### Indexing[m
+ [m
+[1mdiff --git a/pyproject.toml b/pyproject.toml[m
+[1mindex 63070b8..30ded9d 100644[m
+[1m--- a/pyproject.toml[m
+[1m+++ b/pyproject.toml[m
+[36m@@ -18,10 +18,17 @@[m [mdependencies = [[m
+ requires = ["setuptools>=68.0"][m
+ build-backend = "setuptools.build_meta"[m
+ [m
+[32m+[m[32m[tool.setuptools][m
+[32m+[m[32mpackage-dir = {"" = "src"}[m
+[32m+[m
+[32m+[m[32m[tool.setuptools.packages.find][m
+[32m+[m[32mwhere = ["src"][m
+[32m+[m
+ [tool.uv][m
+ managed = true[m
+ [m
+ [dependency-groups][m
+ dev = [[m
+     "mypy>=2.3.1",[m
+[31m-][m
+[32m+[m[32m    "pytest>=9.1.1",[m
+[32m+[m[32m][m
+\ No newline at end of file[m
+[1mdiff --git a/src/__init__.py b/src/__init__.py[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e69de29[m
+[1mdiff --git a/src/rag_system/__init__.py b/src/rag_system/__init__.py[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e69de29[m
+[1mdiff --git a/src/chunker.py b/src/rag_system/chunker.py[m
+[1msimilarity index 100%[m
+[1mrename from src/chunker.py[m
+[1mrename to src/rag_system/chunker.py[m
+[1mdiff --git a/src/corpus_loader.py b/src/rag_system/corpus_loader.py[m
+[1msimilarity index 100%[m
+[1mrename from src/corpus_loader.py[m
+[1mrename to src/rag_system/corpus_loader.py[m
+[1mdiff --git a/src/dataset_loader.py b/src/rag_system/dataset_loader.py[m
+[1msimilarity index 100%[m
+[1mrename from src/dataset_loader.py[m
+[1mrename to src/rag_system/dataset_loader.py[m
+[1mdiff --git a/src/models.py b/src/rag_system/models.py[m
+[1msimilarity index 100%[m
+[1mrename from src/models.py[m
+[1mrename to src/rag_system/models.py[m
+[1mdiff --git a/tests/test_chunker.py b/tests/test_chunker.py[m
+[1mnew file mode 100644[m
+[1mindex 0000000..52e94fa[m
+[1m--- /dev/null[m
+[1m+++ b/tests/test_chunker.py[m
+[36m@@ -0,0 +1,24 @@[m
+[32m+[m[32mfrom rag_system.chunker import chunk_python[m
+[32m+[m
+[32m+[m[32mdef test_large_class_is_split():[m
+[32m+[m[32m    text = """class Example:[m
+[32m+[m[32m    def first(self):[m
+[32m+[m[32m        print("first")[m
+[32m+[m
+[32m+[m[32m    def second(self):[m
+[32m+[m[32m        print("second")[m
+[32m+[m
+[32m+[m[32m    def third(self):[m
+[32m+[m[32m        print("third")[m
+[32m+[m[32m"""[m
+[32m+[m
+[32m+[m[32m    chunks = chunk_python([m
+[32m+[m[32m        text,[m
+[32m+[m[32m        chunk_size=50,[m
+[32m+[m[32m    )[m
+[32m+[m
+[32m+[m[32m    assert len(chunks) > 1[m
+[32m+[m
+[32m+[m[32m    for chunk, start, end in chunks:[m
+[32m+[m[32m        assert len(chunk) <= 50[m
+[32m+[m[32m        assert text[start:end] == chunk[m
+\ No newline at end of file[m
+[1mdiff --git a/uv.lock b/uv.lock[m
+[1mindex ce845b3..2bfb347 100644[m
+[1m--- a/uv.lock[m
+[1m+++ b/uv.lock[m
+[36m@@ -394,6 +394,15 @@[m [mwheels = [[m
+     { url = "https://files.pythonhosted.org/packages/57/b0/0e52c878c53f245edd3a11020f20979b3f490f245af532c7cae3027754b5/idna-3.19-py3-none-any.whl", hash = "sha256:815e7be7a7806d54abb586dc943addc79e8b2ee16915059658cbeff4b1b43bf4", size = 68550, upload-time = "2026-08-18T05:14:22.343Z" },[m
+ ][m
+ [m
+[32m+[m[32m[[package]][m
+[32m+[m[32mname = "iniconfig"[m
+[32m+[m[32mversion = "2.3.0"[m
+[32m+[m[32msource = { registry = "https://pypi.org/simple" }[m
+[32m+[m[32msdist = { url = "https://files.pythonhosted.org/packages/72/34/14ca021ce8e5dfedc35312d08ba8bf51fdd999c576889fc2c24cb97f4f10/iniconfig-2.3.0.tar.gz", hash = "sha256:c76315c77db068650d49c5b56314774a7804df16fee4402c1f19d6d15d8c4730", size = 20503, upload-time = "2025-10-18T21:55:43.219Z" }[m
+[32m+[m[32mwheels = [[m
+[32m+[m[32m    { url = "https://files.pythonhosted.org/packages/cb/b1/3846dd7f199d53cb17f49cba7e651e9ce294d8497c8c150530ed11865bb8/iniconfig-2.3.0-py3-none-any.whl", hash = "sha256:f631c04d2c48c52b84d0d0549c99ff3859c98df65b3101406327ecc7d53fbf12", size = 7484, upload-time = "2025-10-18T21:55:41.639Z" },[m
+[32m+[m[32m][m
+[32m+[m
+ [[package]][m
+ name = "jsonpatch"[m
+ version = "1.33"[m
+[36m@@ -1006,6 +1015,15 @@[m [mwheels = [[m
+     { url = "https://files.pythonhosted.org/packages/f1/d9/7fb5aa316bc299258e68c73ba3bddbc499654a07f151cba08f6153988714/pathspec-1.1.1-py3-none-any.whl", hash = "sha256:a00ce642f577bf7f473932318056212bc4f8bfdf53128c78bbd5af0b9b20b189", size = 57328, upload-time = "2026-04-27T01:46:07.06Z" },[m
+ ][m
+ [m
+[32m+[m[32m[[package]][m
+[32m+[m[32mname = "pluggy"[m
+[32m+[m[32mversion = "1.6.0"[m
+[32m+[m[32msource = { registry = "https://pypi.org/simple" }[m
+[32m+[m[32msdist = { url = "https://files.pythonhosted.org/packages/f9/e2/3e91f31a7d2b083fe6ef3fa267035b518369d9511ffab804f839851d2779/pluggy-1.6.0.tar.gz", hash = "sha256:7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3", size = 69412, upload-time = "2025-05-15T12:30:07.975Z" }[m
+[32m+[m[32mwheels = [[m
+[32m+[m[32m    { url = "https://files.pythonhosted.org/packages/54/20/4d324d65cc6d9205fabedc306948156824eb9f0ee1633355a8f7ec5c66bf/pluggy-1.6.0-py3-none-any.whl", hash = "sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746", size = 20538, upload-time = "2025-05-15T12:30:06.134Z" },[m
+[32m+[m[32m][m
+[32m+[m
+ [[package]][m
+ name = "pydantic"[m
+ version = "2.13.4"[m
+[36m@@ -1137,6 +1155,33 @@[m [mwheels = [[m
+     { url = "https://files.pythonhosted.org/packages/4b/2d/69abac8f838090bbecd5df894befb2c2619e7996a98ddb949db9f3b93225/pydantic_core-2.46.4-pp311-pypy311_pp73-win_amd64.whl", hash = "sha256:d51026d73fcfd93610abc7b27789c26b313920fcfb20e27462d74a7f8b06e983", size = 2193071, upload-time = "2026-05-06T13:38:08.682Z" },[m
+ ][m
+ [m
+[32m+[m[32m[[package]][m
+[32m+[m[32mname = "pygments"[m
+[32m+[m[32mversion = "2.21.0"[m
+[32m+[m[32msource = { registry = "https://pypi.org/simple" }[m
+[32m+[m[32msdist = { url = "https://files.pythonhosted.org/packages/49/2e/ced460408999b33da6b31b0021b0f37d329e202d4169aeb164493778f25b/pygments-2.21.0.tar.gz", hash = "sha256:610ca751c9bc2492b38eb9a38a7fbc93edbbb2d7182edaf34e66ae493dee5c8c", size = 5005329, upload-time = "2026-08-17T08:02:48.824Z" }[m
+[32m+[m[32mwheels = [[m
+[32m+[m[32m    { url = "https://files.pythonhosted.org/packages/71/46/17f022dd3e953bf20a04a028a21ec746d942f8d2af30fa0f124fa0e6a684/pygments-2.21.0-py3-none-any.whl", hash = "sha256:2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9", size = 1250147, upload-time = "2026-08-17T08:02:44.912Z" },[m
+[32m+[m[32m][m
+[32m+[m
+[32m+[m[32m[[package]][m
+[32m+[m[32mname = "pytest"[m
+[32m+[m[32mversion = "9.1.1"[m
+[32m+[m[32msource = { registry = "https://pypi.org/simple" }[m
+[32m+[m[32mdependencies = [[m
+[32m+[m[32m    { name = "colorama", marker = "sys_platform == 'win32'" },[m
+[32m+[m[32m    { name = "exceptiongroup", marker = "python_full_version < '3.11'" },[m
+[32m+[m[32m    { name = "iniconfig" },[m
+[32m+[m[32m    { name = "packaging" },[m
+[32m+[m[32m    { name = "pluggy" },[m
+[32m+[m[32m    { name = "pygments" },[m
+[32m+[m[32m    { name = "tomli", marker = "python_full_version < '3.11'" },[m
+[32m+[m[32m][m
+[32m+[m[32msdist = { url = "https://files.pythonhosted.org/packages/e4/47/b9efed96c114afcfa3c9d3fe98a76a1d14c74a9e266d397cf6eb64be5e01/pytest-9.1.1.tar.gz", hash = "sha256:1088fbde8f2b49d95a549a195707afa7a76a3ce9bcadc26b6d71f0ffda5fe313", size = 1636369, upload-time = "2026-06-19T10:58:32.857Z" }[m
+[32m+[m[32mwheels = [[m
+[32m+[m[32m    { url = "https://files.pythonhosted.org/packages/24/25/1de2678b631f5a49215c6c96fff41ba892b0a34df68d6d80292b1b48aa7f/pytest-9.1.1-py3-none-any.whl", hash = "sha256:37a86b45efb9a47a61a36449063e8e18d0cab3161329fc099eb21783169c4f0c", size = 386536, upload-time = "2026-06-19T10:58:31.347Z" },[m
+[32m+[m[32m][m
+[32m+[m
+ [[package]][m
+ name = "pyyaml"[m
+ version = "6.0.3"[m
+[36m@@ -1216,6 +1261,7 @@[m [mdependencies = [[m
+ [package.dev-dependencies][m
+ dev = [[m
+     { name = "mypy" },[m
+[32m+[m[32m    { name = "pytest" },[m
+ ][m
+ [m
+ [package.metadata][m
+[36m@@ -1228,7 +1274,10 @@[m [mrequires-dist = [[m
+ ][m
+ [m
+ [package.metadata.requires-dev][m
+[31m-dev = [{ name = "mypy", specifier = ">=2.3.1" }][m
+[32m+[m[32mdev = [[m
+[32m+[m[32m    { name = "mypy", specifier = ">=2.3.1" },[m
+[32m+[m[32m    { name = "pytest", specifier = ">=9.1.1" },[m
+[32m+[m[32m][m
+ [m
+ [[package]][m
+ name = "rank-bm25"[m

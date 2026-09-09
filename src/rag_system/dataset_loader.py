@@ -1,6 +1,6 @@
 import json
 
-from models import RagDataset
+from .models import RagDataset
 
 
 class DatasetLoader:

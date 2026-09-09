@@ -1271,9 +1271,9 @@ However, generated code must be:
 
 ### Chunk Model
 
-* [ ] Final `Chunk` model
-* [ ] Chunk metadata
-* [ ] Chunk validation
+* [x] Final `Chunk` model
+* [x] Chunk metadata
+* [x] Chunk validation
 
 ### Indexing
 
