@@ -49,3 +49,10 @@ class StudentSearchResultsAndAnswer(BaseModel):
 class Document(BaseModel):
     file_path: str
     content: str
+
+class Chunk(BaseModel):
+    file_path: str
+    content: str
+    first_character_index: int
+    last_character_index: int
+
