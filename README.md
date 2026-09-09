@@ -1259,15 +1259,15 @@ However, generated code must be:
 * [x] Method extraction
 * [x] Character offsets
 * [x] Split large functions/methods
-* [ ] Decide class strategy
-* [ ] Handle large classes
+* [x] Decide class strategy
+* [x] Handle large classes
 
 ### Markdown/Text
 
-* [ ] Markdown chunking
-* [ ] Text chunking
-* [ ] Character offsets
-* [ ] Chunk size validation
+* [x] Markdown chunking
+* [x] Text chunking
+* [x] Character offsets
+* [x] Chunk size validation
 
 ### Chunk Model
 
