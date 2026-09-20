@@ -1277,7 +1277,7 @@ However, generated code must be:
 
 ### Indexing
 
-* [ ] Build BM25/TF-IDF index
+* [x] Build BM25/TF-IDF index
 * [ ] Persist index
 * [ ] Store index under `data/processed/`
 * [ ] Add tqdm
