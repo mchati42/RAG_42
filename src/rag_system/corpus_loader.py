@@ -2,6 +2,8 @@
 
 from pathlib import Path
 
+from tqdm import tqdm
+
 from .models import Document
 
 
@@ -12,8 +14,8 @@ SUPPORTED_EXTENSIONS = {".py", ".md", ".txt"}
 def load_corpus(root: Path) -> list[Document]:
     """Load supported files from the corpus directory."""
     documents: list[Document] = []
-
-    for path in root.rglob("*"):
+    paths = list(root.rglob("*"))
+    for path in tqdm(paths, desc="Loading corpus", ncols=80,):
         if path.is_file() and path.suffix in SUPPORTED_EXTENSIONS:
             content = path.read_text(encoding="utf-8")
 

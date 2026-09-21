@@ -2,3 +2,4 @@ data/raw/vllm-0.10.1
 *.egg-info/
 __pycache__/
 *.pyc
+data/processed/

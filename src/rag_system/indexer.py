@@ -1,22 +1,8 @@
-import io
-import tokenize
+from pathlib import Path
 
-from rank_bm25 import BM25Okapi
+import bm25s
 
 from rag_system.models import Chunk
-
-
-def tokenize_code(code: str) -> list[str]:
-    """Convert Python code into tokens."""
-    tokens = tokenize.generate_tokens(
-        io.StringIO(code).readline
-    )
-
-    return [
-        token.string
-        for token in tokens
-        if token.type != tokenize.ENCODING
-    ]
 
 
 class Indexer:
@@ -25,12 +11,11 @@ class Indexer:
     def __init__(self, chunks: list[Chunk]) -> None:
         self.chunks = chunks
 
-        tokenized_chunks = [
-            tokenize_code(chunk.content)
-            for chunk in chunks
-        ]
+        corpus = [chunk.content for chunk in chunks]
 
-        self.bm25 = BM25Okapi(tokenized_chunks)
+        self.bm25 = bm25s.BM25()
+        tokens = bm25s.tokenize(corpus)
+        self.bm25.index(tokens)
 
     def search(
         self,
@@ -38,19 +23,34 @@ class Indexer:
         k: int = 5,
     ) -> list[tuple[Chunk, float]]:
         """Return the k most relevant chunks."""
-        query_tokens = tokenize_code(query)
+        query_tokens = bm25s.tokenize([query])
 
-        scores = self.bm25.get_scores(query_tokens)
-        print(f"scores: {scores}")
-
-        top_indexes = sorted(
-            range(len(scores)),
-            key=lambda i: scores[i],
-            reverse=True,
-        )[:k]
-        print(f"top_indexes: {top_indexes}")
+        results, scores = self.bm25.retrieve(
+            query_tokens,
+            k=k,
+        )
 
         return [
-            (self.chunks[i], float(scores[i]))
-            for i in top_indexes
+            (self.chunks[int(index)], float(score))
+            for index, score in zip(
+                results[0],
+                scores[0],
+            )
         ]
+
+    def save(self, path: Path) -> None:
+        """Save the BM25 index."""
+        path.mkdir(parents=True, exist_ok=True)
+        self.bm25.save(str(path))
+
+    @classmethod
+    def load(
+        cls,
+        path: Path,
+        chunks: list[Chunk],
+    ) -> "Indexer":
+        """Load a BM25 index."""
+        indexer = cls.__new__(cls)
+        indexer.chunks = chunks
+        indexer.bm25 = bm25s.BM25.load(str(path))
+        return indexer
