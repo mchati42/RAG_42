@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 
 import bm25s
 
@@ -17,7 +18,7 @@ class Indexer:
         tokens = bm25s.tokenize(corpus)
         self.bm25.index(tokens)
 
-    def search(
+    def search(                 
         self,
         query: str,
         k: int = 5,
@@ -42,15 +43,25 @@ class Indexer:
         """Save the BM25 index."""
         path.mkdir(parents=True, exist_ok=True)
         self.bm25.save(str(path))
+        chunks_data = [
+            chunk.model_dump()
+            for chunk in self.chunks
+        ]
+        with open(path / "chunks.json", "w") as file:
+            json.dump(chunks_data, file)
 
     @classmethod
     def load(
         cls,
         path: Path,
-        chunks: list[Chunk],
     ) -> "Indexer":
         """Load a BM25 index."""
         indexer = cls.__new__(cls)
-        indexer.chunks = chunks
         indexer.bm25 = bm25s.BM25.load(str(path))
+        with open(path / "chunks.json", "r") as file:
+            chunks_data = json.load(file)
+        indexer.chunks = [
+            Chunk.model_validate(data)
+            for data in chunks_data
+        ]
         return indexer

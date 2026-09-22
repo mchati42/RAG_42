@@ -6,6 +6,7 @@ from src.rag_system.chunker import chunk_markdown, chunk_python
 from src.rag_system.corpus_loader import load_corpus
 from src.rag_system.indexer import Indexer
 from src.rag_system.models import Chunk
+from src.rag_system.retriever import Retriever
 
 
 class CLI:
@@ -36,7 +37,6 @@ class CLI:
                         last_character_index=end,
                     )
                 )
-
         print(f"Created {len(chunks)} chunks")
 
         indexer = Indexer(chunks)
@@ -45,7 +45,16 @@ class CLI:
         indexer.save(index_path)
 
         print(f"Index saved to {index_path}")
-
+    def search(self, query: str, k: int = 5) -> None:
+        retriever = Retriever(
+            Path("data/processed/index")
+        )
+        result = retriever.search(
+            "cli",
+            query,
+            k,
+        )
+        print(result)
 
 if __name__ == "__main__":
     fire.Fire(CLI)
