@@ -1,0 +1,6 @@
+should id get all files and take .md and txt and py and load and chunk it.
+should i indexing it and should i save this index
+retreave --> shourch loading  indexes and pass query and top k
+answer --> pass retreave to llm
+evaluaichen read my dataset answers and comp with my answers 
+....

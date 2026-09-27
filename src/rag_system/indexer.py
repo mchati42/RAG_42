@@ -12,9 +12,14 @@ class Indexer:
     def __init__(self, chunks: list[Chunk]) -> None:
         self.chunks = chunks
 
-        corpus = [chunk.content for chunk in chunks]
+        corpus = [
+            f"{chunk.file_path} {chunk.content} "
+            f"{chunk.content.replace('_', ' ')}"
+            for chunk in chunks
+        ]
 
         self.bm25 = bm25s.BM25()
+
         tokens = bm25s.tokenize(corpus)
         self.bm25.index(tokens)
 

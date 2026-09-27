@@ -1,20 +1,34 @@
 from pathlib import Path
 
-from rag_system.retriever import Retriever
+from rag_system.indexer import Indexer
 
 
-def test_retriever() -> None:
-    """Test that the retriever returns search results."""
+def test_search_returns_k_results() -> None:
+    """Test that search returns the requested number of results."""
     index_path = Path("data/processed/index")
 
-    retriever = Retriever(index_path)
+    indexer = Indexer.load(index_path)
 
-    result = retriever.search(
-        "Q1",
+    results = indexer.search(
         "What activation formats does the fused batched MoE layer return in vLLM?",
-        5,
+        k=5,
     )
 
-    assert result.question_id == "Q1"
-    assert result.question != ""
-    assert len(result.retrieved_sources) == 5
+    assert len(results) == 5
+
+
+def test_search_returns_chunks_and_scores() -> None:
+    """Test that search returns chunks with scores."""
+    index_path = Path("data/processed/index")
+
+    indexer = Indexer.load(index_path)
+
+    results = indexer.search(
+        "What is vLLM?",
+        k=5,
+    )
+
+    for chunk, score in results:
+        assert chunk.file_path != ""
+        assert chunk.content != ""
+        assert isinstance(score, float)
