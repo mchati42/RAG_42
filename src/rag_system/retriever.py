@@ -1,36 +1,29 @@
+import json
 from pathlib import Path
 
-from .indexer import Indexer
+import bm25s
 
-from .models import MinimalSearchResults, MinimalSource
+from .models import Chunk
+
 
 class Retriever:
-    def __init__(
-        self,
-        index_path: Path,
-    ) -> None:
-        self.indexer = Indexer.load(index_path)
-
-
-    def search(
-        self,
-        question_id: str,
-        query: str,
-        k: int = 5,
-    ) -> MinimalSearchResults:
-        results = self.indexer.search(query, k)
-
-        sources = [
-            MinimalSource(
-                file_path=chunk.file_path,
-                first_character_index=chunk.first_character_index,
-                last_character_index=chunk.last_character_index,
-            )
-            for chunk, score in results
+    """Search the BM25 index and return matching chunks."""
+    def __init__(self, index_dir: Path) -> None:
+        self.bm25 = bm25s.BM25.load(str(index_dir))
+        with open(index_dir / "chunks.json", "r", encoding="utf-8") as file:
+            data = json.load(file)
+        self.chunks = [
+            Chunk.model_validate(item)
+            for item in data
         ]
-
-        return MinimalSearchResults(
-            question_id=question_id,
-            question=query,
-            retrieved_sources=sources,
-        )
+    def search(self, query: str, k: int = 5) -> list[tuple[Chunk, float]]:
+        """Search the index."""
+        query_tokens = bm25s.tokenize([query])
+        results = self.bm25.retrieve(query_tokens, k=k)
+        document_indexes = results.documents[0]
+        scores = results.scores[0]
+        search_results = []
+        for chunk_id, score in zip(document_indexes, scores):
+            chunk = self.chunks[chunk_id]
+            search_results.append((chunk, score))
+        return search_results
