@@ -24,7 +24,7 @@ def load_corpus(root: Path) -> List[Document]:
         if path.is_file() and path.suffix in PY_MD_TXT_FILES
     ]
 
-    for path in tqdm(paths, desc="Loading corpus", ncols=80):
+    for path in tqdm(paths, desc="Loading corpus", ncols=120):
         try:
             content = path.read_text(
                 encoding="utf-8",

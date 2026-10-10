@@ -7,11 +7,14 @@ authors = [
     { name = "Your Name", email = "your.email@example.com" }
 ]
 dependencies = [
+    "accelerate>=1.15.0",
     "bm25s>=0.3.11",
     "fire>=0.7.1",
     "langchain-text-splitters>=1.1.2",
     "pydantic>=2.0",
+    "torch>=2.14.1",
     "tqdm>=4.65",
+    "transformers>=5.18.0",
 ]
 
 [build-system]
