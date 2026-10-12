@@ -15,7 +15,7 @@ class Generator:
             device_map="auto",
         )
 
-    def generate(self, prompt: str) -> str:
+    def generate(self, question: str, context: str) -> str:
         """
         Generate an answer from a prompt.
         START
@@ -49,6 +49,16 @@ class Generator:
         11. RETURN the final answer.
 
         END
+        """
+        prompt = f"""
+            Answer the question using only the context below.
+            If the answer is not in the context, say "I don't know".
+
+            Context:
+            {context}
+
+            Question:
+            {question}
         """
 
         messages = [
@@ -86,7 +96,3 @@ class Generator:
         ).strip("\n")
 
         return content
-
-generator = Generator()
-
-answer = generator.generate("what is python")

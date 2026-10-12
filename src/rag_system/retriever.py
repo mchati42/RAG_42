@@ -20,10 +20,10 @@ class Retriever:
         """Search the index."""
         query_tokens = bm25s.tokenize([query])
         results = self.bm25.retrieve(query_tokens, k=k)
-        document_indexes = results.documents[0]
-        scores = results.scores[0]
+        print(results.scores[0][:4])
+        exit(1)
         search_results = []
-        for chunk_id, score in zip(document_indexes, scores):
+        for chunk_id, score in zip(results.documents[0], results.scores[0]):
             chunk = self.chunks[chunk_id]
             search_results.append((chunk, score))
         return search_results

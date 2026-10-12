@@ -2,6 +2,7 @@
 
 import json
 from pathlib import Path
+from src.rag_system.generator import Generator
 
 import fire
 
@@ -14,9 +15,11 @@ from src.rag_system.corpus_loader import load_corpus
 from src.rag_system.indexer import build_index
 from src.rag_system.models import (
     Chunk,
+    MinimalAnswer,
     MinimalSearchResults,
     MinimalSource,
     StudentSearchResults,
+    StudentSearchResultsAndAnswer,
 )
 from src.rag_system.retriever import Retriever
 
@@ -134,6 +137,34 @@ class CLI:
                 file,
                 indent=2,
             )
+    def  answer(self, query: str) -> None:
+        retriever = Retriever(Path("data/processed/index"))
+        results = retriever.search(query, k=5)
+        context = "\n\n".join(
+            chunk.content for chunk, score in results
+        )
+
+        generator = Generator()
+        answer = generator.generate(
+            question=query,
+            context=context,
+        )
+
+    def answer_dataset(
+            self, 
+            student_search_results_path: str,
+            save_directory: str,
+    ) -> None:
+        """Generate answers for a dataset of search results."""
+        with open(
+            student_search_results_path,
+            "r",
+            encoding="utf-8",
+        ) as file:
+            data = json.load(file)
+        print(data["search_results"][:1])
+        student_results = StudentSearchResults.model_validate(data)
+        # print(student_results)
 
 
 if __name__ == "__main__":
