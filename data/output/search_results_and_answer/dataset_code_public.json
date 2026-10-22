@@ -1,0 +1,39 @@
+{
+  "search_results": [
+    {
+      "question_id": "189c8b8a-e59c-4fca-92ad-c02df42cbe40",
+      "question": "What activation formats does the fused batched MoE layer return in vLLM?",
+      "retrieved_sources": [
+        {
+          "file_path": "data/raw/vllm-0.10.1/vllm/model_executor/layers/quantization/compressed_tensors/compressed_tensors_moe.py",
+          "first_character_index": 15480,
+          "last_character_index": 17405
+        },
+        {
+          "file_path": "data/raw/vllm-0.10.1/vllm/model_executor/layers/quantization/gguf.py",
+          "first_character_index": 20015,
+          "last_character_index": 21195
+        }
+      ],
+      "answer": "SiLU"
+    },
+    {
+      "question_id": "02789461-05fd-435d-9673-91606102d6c9",
+      "question": "What are the default values for FP8_MIN and FP8_MAX constants in vLLM's triton_flash_attention module?",
+      "retrieved_sources": [
+        {
+          "file_path": "data/raw/vllm-0.10.1/vllm/model_executor/layers/quantization/utils/fp8_utils.py",
+          "first_character_index": 13918,
+          "last_character_index": 15675
+        },
+        {
+          "file_path": "data/raw/vllm-0.10.1/tests/kernels/quantization/test_block_fp8.py",
+          "first_character_index": 2416,
+          "last_character_index": 3880
+        }
+      ],
+      "answer": "I don't know."
+    }
+  ],
+  "k": 2
+}

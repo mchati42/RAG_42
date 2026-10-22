@@ -1,0 +1,57 @@
+Using CPython 3.10.12 interpreter at: /usr/bin/python3.10
+Creating virtual environment at: /home/mchati/goinfre/.venv
+   Building rag-system @ file:///home/mchati/Desktop/RAG_42
+Downloading sympy (6.0MiB)
+Downloading pygments (1.2MiB)
+Downloading nvidia-cufile (1.2MiB)
+Downloading networkx (1.6MiB)
+Downloading tokenizers (3.2MiB)
+Downloading zstandard (5.3MiB)
+Downloading nvidia-cuda-runtime (2.1MiB)
+Downloading mypy (14.5MiB)
+Downloading cuda-bindings (6.8MiB)
+Downloading nvidia-cusparselt-cu13 (162.3MiB)
+Downloading pydantic-core (2.0MiB)
+Downloading nvidia-cufft (204.2MiB)
+Downloading nvidia-cublas (403.5MiB)
+Downloading nvidia-nvjitlink (40.5MiB)
+Downloading nvidia-nvshmem-cu13 (57.6MiB)
+Downloading nvidia-cuda-cupti (10.2MiB)
+Downloading nvidia-cusparse (139.2MiB)
+Downloading hf-xet (4.3MiB)
+Downloading nvidia-cuda-nvrtc (86.0MiB)
+Downloading nvidia-cudnn-cu13 (527.5MiB)
+Downloading nvidia-curand (56.8MiB)
+Downloading numpy (16.0MiB)
+Downloading ast-serialize (1.2MiB)
+Downloading nvidia-cusolver (191.6MiB)
+Downloading transformers (12.0MiB)
+Downloading torch (528.9MiB)
+Downloading triton (236.4MiB)
+Downloading nvidia-nccl-cu13 (206.0MiB)
+ Downloaded nvidia-cufile
+ Downloaded ast-serialize
+ Downloaded pygments
+      Built rag-system @ file:///home/mchati/Desktop/RAG_42
+ Downloaded networkx
+ Downloaded pydantic-core
+ Downloaded nvidia-cuda-runtime
+ Downloaded tokenizers
+ Downloaded hf-xet
+ Downloaded zstandard
+ Downloaded sympy
+ Downloaded cuda-bindings
+ Downloaded nvidia-cuda-cupti
+ Downloaded transformers
+ Downloaded mypy
+ Downloaded numpy
+ Downloaded nvidia-nvjitlink
+ Downloaded nvidia-curand
+ Downloaded nvidia-nvshmem-cu13
+ Downloaded nvidia-cuda-nvrtc
+ Downloaded nvidia-cusparse
+ Downloaded nvidia-cusparselt-cu13
+ Downloaded nvidia-cusolver
+ Downloaded nvidia-cufft
+ Downloaded nvidia-nccl-cu13
+ Downloaded triton

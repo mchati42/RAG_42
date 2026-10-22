@@ -149,22 +149,71 @@ class CLI:
             question=query,
             context=context,
         )
+        print(answer)
 
     def answer_dataset(
-            self, 
-            student_search_results_path: str,
-            save_directory: str,
+        self,
+        student_search_results_path: str,
+        save_directory: str,
     ) -> None:
-        """Generate answers for a dataset of search results."""
-        with open(
-            student_search_results_path,
-            "r",
+        """Generate answers for existing search results."""
+        with open(student_search_results_path, encoding="utf-8") as file:
+            data = StudentSearchResults.model_validate_json(file.read())
+
+        generator = Generator()
+        answers: list[MinimalAnswer] = []
+
+        for result in data.search_results:
+            context_parts: list[str] = []
+
+            for source in result.retrieved_sources:
+                file_path = Path(source.file_path)
+                if not file_path.exists():
+                    file_path = (
+                        Path("data/raw/vllm-0.10.1")
+                        / "vllm-0.10.1"
+                        / file_path.relative_to("data/raw/vllm-0.10.1")
+                    )
+
+                with open(file_path, encoding="utf-8") as file:
+                    content = file.read()
+
+                context = content[
+                    source.first_character_index:source.last_character_index
+                ]
+                context_parts.append(context)
+
+            context = "\n\n".join(context_parts)
+
+            answer = generator.generate(
+                question=result.question,
+                context=context,
+            )
+
+            answers.append(
+                MinimalAnswer(
+                    question_id=result.question_id,
+                    question=result.question,
+                    retrieved_sources=result.retrieved_sources,
+                    answer=answer,
+                )
+            )
+
+        output = StudentSearchResultsAndAnswer(
+            search_results=answers,
+            k=data.k,
+        )
+
+        output_file = Path(save_directory) / Path(
+            student_search_results_path
+        ).name
+        output_file.parent.mkdir(parents=True, exist_ok=True)
+        output_file.write_text(
+            output.model_dump_json(indent=2),
             encoding="utf-8",
-        ) as file:
-            data = json.load(file)
-        print(data["search_results"][:1])
-        student_results = StudentSearchResults.model_validate(data)
-        # print(student_results)
+        )
+
+        
 
 
 if __name__ == "__main__":

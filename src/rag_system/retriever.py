@@ -20,8 +20,6 @@ class Retriever:
         """Search the index."""
         query_tokens = bm25s.tokenize([query])
         results = self.bm25.retrieve(query_tokens, k=k)
-        print(results.scores[0][:4])
-        exit(1)
         search_results = []
         for chunk_id, score in zip(results.documents[0], results.scores[0]):
             chunk = self.chunks[chunk_id]

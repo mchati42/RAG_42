@@ -1,0 +1,16 @@
+The API endpoint for chat completions supported by vLLM is the create chat completion endpoint. 
+
+The context mentions:  
+```bash
+curl http://localhost:8000/v1/chat/completions \
+    -H "Content-Type: application/json" \
+    -d '{
+        "model": "Qwen/Qwen2.5-1.5B-Instruct",
+        "messages": [
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": "Tell me a joke."},
+        ]
+    }'
+```
+
+**Answer:** The create chat completion endpoint.
