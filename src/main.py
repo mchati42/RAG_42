@@ -3,6 +3,7 @@
 import json
 from pathlib import Path
 from src.rag_system.generator import Generator
+from src.rag_system.evaluate import evaluation_data
 
 import fire
 
@@ -213,6 +214,9 @@ class CLI:
             encoding="utf-8",
         )
 
+    def evaluate(self, dataset_path, search_results_path):
+        """Evaluate search results."""
+        evaluation_data(dataset_path, search_results_path)
         
 
 

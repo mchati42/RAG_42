@@ -1,4 +1,5 @@
-from pydantic import BaseModel
+from pydantic import BaseModel,Field
+from typing import List
 
 
 class MinimalSource(BaseModel):
@@ -7,21 +8,12 @@ class MinimalSource(BaseModel):
     last_character_index: int
 
 
-class AnsweredQuestion(BaseModel):
-    question_id: str
-    question: str
-    answer: str
-    sources: list[MinimalSource]
-    difficulty: str
-    is_valid: bool
-
-
 class UnansweredQuestion(BaseModel):
-    question_id: str
+    question_id: str = Field(default_factory=lambda:str(uuid.uuid4()))
     question: str
-    difficulty: str
-    is_valid: bool
-
+class AnsweredQuestion(UnansweredQuestion):
+    sources: List[MinimalSource]
+    answer: str
 
 class RagDataset(BaseModel):
     rag_questions: list[AnsweredQuestion | UnansweredQuestion]
