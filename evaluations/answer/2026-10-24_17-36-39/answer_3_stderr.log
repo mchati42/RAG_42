@@ -1,0 +1,6 @@
+Split strings:   0%|          | 0/1 [00:00<?, ?it/s]                                                    BM25S Retrieve:   0%|          | 0/1 [00:00<?, ?it/s]                                                     Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 17227.46it/s]
+ERROR: Could not consume arg: --k
+Usage: __main__.py answer 'How do you enable expert parallelism in vLLM for MoE models?'
+
+For detailed information on this command, run:
+  __main__.py answer 'How do you enable expert parallelism in vLLM for MoE models?' --help

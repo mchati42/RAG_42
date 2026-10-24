@@ -1,6 +1,7 @@
 """Command-line interface for the RAG system."""
 
 import json
+from tqdm import  tqdm
 from pathlib import Path
 from src.rag_system.generator import Generator
 from src.rag_system.evaluate import evaluation_data
@@ -96,7 +97,7 @@ class CLI:
 
         search_results: list[MinimalSearchResults] = []
 
-        for question in data["rag_questions"]:
+        for question in tqdm(data["rag_questions"]):
             results = retriever.search(
                 question["question"],
                 k,
@@ -164,7 +165,7 @@ class CLI:
         generator = Generator()
         answers: list[MinimalAnswer] = []
 
-        for result in data.search_results:
+        for result in tqdm(data.search_results):
             context_parts: list[str] = []
 
             for source in result.retrieved_sources:

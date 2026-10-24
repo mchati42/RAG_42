@@ -1,7 +1,7 @@
 Split strings:   0%|          | 0/1 [00:00<?, ?it/s]                                                    BM25S Retrieve:   0%|          | 0/1 [00:00<?, ?it/s]                                                     Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 13440.93it/s]
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 17907.40it/s]
 ERROR: Could not consume arg: --k
-Usage: __main__.py answer 'What is vLLM?'
+Usage: __main__.py answer 'What causes the NCCL error "unhandled system error" during ncclCommInitRank in vLLM distributed serving?'
 
 For detailed information on this command, run:
-  __main__.py answer 'What is vLLM?' --help
+  __main__.py answer 'What causes the NCCL error "unhandled system error" during ncclCommInitRank in vLLM distributed serving?' --help

@@ -1,4 +1,5 @@
 """Evaluate search results."""
+from tqdm import tqdm
 
 import json
 from pathlib import Path
@@ -96,7 +97,7 @@ def recallk(
 
     total_recall = 0.0
 
-    for dataset_question in questions:
+    for dataset_question in tqdm(questions):
         student_question = student.get(dataset_question.question_id)
 
         if student_question is None:

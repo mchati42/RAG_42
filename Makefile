@@ -20,4 +20,4 @@ lint:
 		--warn-unused-ignores \
 		--ignore-missing-imports \
 		--disallow-untyped-defs \
-		--check-untyped-defs
+		--check-untyped-defsa

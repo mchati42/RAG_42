@@ -1,0 +1,1 @@
+To enable expert parallelism in vLLM for MoE models, set the `enable_expert_parallel=True` flag. This strategy uses the same degree of parallelism as tensor parallelism and is specifically designed for balancing expert computation across GPUs.

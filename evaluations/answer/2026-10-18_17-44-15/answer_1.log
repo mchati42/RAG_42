@@ -1,1 +1,0 @@
-The NCCL error "unhandled system error" during `ncclCommInitRank` in vLLM distributed serving is caused by a system-level issue during the initialization of the NCCL communicator. This typically results in a deadlock in distributed execution, and to debug this, check the logs or set environment variables like `VLLM_LOGGING_LEVEL=DEBUG` or `NCCL_DEBUG=TRACE`.

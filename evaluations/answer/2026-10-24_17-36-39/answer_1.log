@@ -1,0 +1,1 @@
+The NCCL error "unhandled system error during ncclCommInitRank" in vLLM distributed serving is caused by issues with the device type inference, incorrect network setup, or GPUDirect RDMA communication. To resolve this, ensure vLLM correctly specifies the model implementation, verifies the network configuration, and uses the appropriate NCCL settings.

@@ -1,6 +1,0 @@
-Split strings:   0%|          | 0/1 [00:00<?, ?it/s]                                                    BM25S Retrieve:   0%|          | 0/1 [00:00<?, ?it/s]                                                     Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 16966.85it/s]
-ERROR: Could not consume arg: --k
-Usage: __main__.py answer 'What Python packages need to be installed to use vLLM with LangChain?'
-
-For detailed information on this command, run:
-  __main__.py answer 'What Python packages need to be installed to use vLLM with LangChain?' --help
